@@ -38,5 +38,7 @@ for (j in 1:N) {
 }
 
 cat(sprintf("Simulations complete!\n"));
-cat(sprintf("Estimated max of I: %f, rounded off: %i\n", mean(I.max), round(mean(I.max))));
-cat(sprintf("Estimated number of time steps before max I: %f, rounded off: %i\n", mean(n.max), round(mean(n.max))));
+cat(sprintf("----------------------\nEstimated max of I: %f, rounded off: %i\n", mean(I.max), round(mean(I.max))));
+cat(sprintf("Standard deviation max of I: %f, rounded off: %i\n", sd(I.max), round(sd(I.max))));
+cat(sprintf("----------------------\nEstimated number of time steps before max I: %f, rounded off: %i\n", mean(n.max), round(mean(n.max))));
+cat(sprintf("Standard deviation number of time steps before max I: %f, rounded off: %i\n--------------------------\n", sd(n.max), round(sd(n.max))));
