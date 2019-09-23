@@ -28,29 +28,31 @@ cat(sprintf("Starting simulation, simulating %i time steps\n", n));
 for (i in 2:n) {
     # Calculate number of people that gets sick
     dI = rbinom(1, Y[S, i - 1], beta(Y[I, i - 1], tot));
-    # Calculate number of people that gets recovers
+    # Calculate number of people that recovers
     dR = rbinom(1, Y[I, i - 1], gamma);
     # Update population
     Y[S, i] <- Y[S, i - 1] - dI;
-    Y[I, i] <- Y[I, i - 1] + dI;
-    
-    Y[I, i] <- Y[I, i - 1] - dR;
+    Y[I, i] <- Y[I, i - 1] + dI - dR;
     Y[R, i] <- Y[R, i - 1] + dR;
+    # cat(sprintf("dI: %f\ndR: %f\nS: %f\nI: %f\nR: %f\nTotal: %f\n", dI, dR, Y[S, i], Y[I, i], Y[R, i], Y[S, i] + Y[I, i] + Y[R, i]));    
 }
 
 cat(sprintf("Simulations complete!\n"));
+cat(sprintf("Final population distribution:\n\n"));
 
 S <- Y[1,];
 I <- Y[2,];
 R <- Y[3,];
 t <- c(1:n);
 
-plot(t, S, type='l', col='red', main = 'Evolution over time for $S$, $I$ and $R$', ylim=c(0, tot), ylab='Number of individuals', xlab='$n$', cex.lab=1.5);
-lines(t, I, type='l', col='green');
-lines(t, R, type='l', col='blue');
+cat(sprintf("S: %f\nI: %f\nR: %f\nTotal: %f\n", S[length(S)], I[length(I)], R[length(R)], S[length(S)] + I[length(I)] + R[length(R)]));
+
+plot(t, S, type='l', col='red', main = 'Evolution over time for $S$, $I$ and $R$', ylim=c(0, tot), ylab='Number of individuals', xlab='$n$', cex.lab=1.5, lwd = 3.5);
+lines(t, I, type='l', col='green', lwd = 3.5);
+lines(t, R, type='l', col='blue', lwd = 3.5);
 grid(nx=4, ny=10, col='darkgrey');
 legend(x=0.7*n, y=0.75*tot, legend=c('$S$', '$I$', '$R$'),
-       col=c('red', 'green', 'blue'), lty=1:2, cex=1.5, bg='white')
+       col=c('red', 'green', 'blue'), lty=1:2, cex=1.5, bg='white', lwd = 3.5)
 dev.off();
 
 tools::texi2dvi('problem1e.tex',pdf=T);

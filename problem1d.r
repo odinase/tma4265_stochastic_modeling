@@ -1,9 +1,9 @@
 beta <- 0.05;
 gamma <- 0.20;
 N <- 1000;
-M <- 50;
-T.s <- c(1:M);
-T.i <- c(1:M);
+N.realizations <- 1000;
+T.s <- c(1:N);
+T.i <- c(1:N);
 p <- 0;
 cur.state <- "S"
 
@@ -23,7 +23,7 @@ for (i in 1:N) {
         t.s <- t.s + 1;
         p <- runif(1);
     }
-
+    
     p = runif(1);
 
     while (p > gamma) {
