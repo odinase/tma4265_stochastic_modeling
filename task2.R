@@ -34,23 +34,27 @@ cat(sprintf("Expectation mean: %f\n", mean(expectations)));
 cat(sprintf("Variance std: %f\n", sd(variances)));
 cat(sprintf("Variance mean: %f\n", mean(variances)));
 
-### Figure with realizations of X(t)
+### Figure with 10 realizations of X(t)
+library(ggplot2) #Must install package "ggplot2" to plot
+
+t = 59;
 realizations = 10;
-nP = matrix(, nrow = realizations, ncol = 60);
 
-# Generate data
-T = 0:59;
-for (i in 1:realizations) {
-  for (t in T) {
-    nP[i,(t+1)] = rpois(1, t*lambda);
+plot = ggplot(); #Initialize plot to be iteratively updated
+
+for (realization in 1:realizations) {
+  n = rpois(1, lambda*t);
+  u = numeric(n);
+  for (i in 1:n) {
+    u[i] = runif(1,0,t);
   }
+  w = sort(u);
+  
+  w = c(0, w, t);         #Add start and end time for plotting purposes
+  events = c(1, 1:n, n);  #Duplicate first and last event for plotting purposes
+  
+  df = data.frame(w, events); #Create dataframe to use ggplot
+  plot = plot + geom_line(aes_string(x = w, y = events, color= shQuote(realization)));
 }
 
-# Plot data
-plot(NULL, NULL, xlim = c(0, 59), ylim = c(0, max(nP)), xlab = "Time", ylab = "Events", main = "10 realizations of X(t)")
-for (i in 1:realizations) {
-  for (t in T) {
-    lines(T[(t+1):((t+1)+1)], rep(nP[i,t+1],2), col = 31+i)
-
-  }
-}
+plot + labs(x = "Time", y = "Events") + theme(legend.position = "none")
