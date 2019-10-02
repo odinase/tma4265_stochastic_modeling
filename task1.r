@@ -18,8 +18,8 @@ for (i in 1:N) {
         cat(sprintf("Running simulation %i...\n", i));
     }
 
-    t.s <- 0;
-    t.i <- 0;
+    t.s <- 1;
+    t.i <- 1;
 
     p = runif(1);
 

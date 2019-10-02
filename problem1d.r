@@ -1,3 +1,5 @@
+# library(ggplot2)
+
 beta <- 0.05;
 gamma <- 0.20;
 N <- 1000;
@@ -5,17 +7,16 @@ N.realizations <- 1000;
 T.s <- c(1:N);
 T.i <- c(1:N);
 p <- 0;
-cur.state <- "S"
 
 cat(sprintf("Starting simulation, simulating %i times\n\n--------------------\n\n", N));
 
 for (i in 1:N) {
-    if (!(i %% 100)) {
-        cat(sprintf("Running simulation %i...\n", i));
-    }
+    # if (!(i %% 100)) {
+    #     cat(sprintf("Running simulation %i...\n", i));
+    # }
 
-    t.s <- 0;
-    t.i <- 0;
+    t.s <- 1;
+    t.i <- 1;
 
     p = runif(1);
 
