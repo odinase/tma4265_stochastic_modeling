@@ -26,6 +26,13 @@ create.Covar.Matrix.Conditional <- function(p, q, covar.matrix) {
     return(covar.matrix.11 - covar.matrix.12 %*% (solve(covar.matrix.22) %*% covar.matrix.21))
 }
 
+get.pred.interval <- function(mean, var, alpha) {
+    zq <- qnorm(alpha/2, lower.tail=FALSE);
+    lower <- mean - zq*sqrt(var);
+    upper <- mean + zq*sqrt(var);
+    return(cbind(lower, upper));
+}
+
 
 phi.M <- 15;
 E.Y <- 0.5;
@@ -43,9 +50,13 @@ mu <- as.matrix(rep(E.Y, N))
 y.cond <- as.matrix(c(0.500, 0.320, 0.400, 0.350, 0.600));
 sigma <- 0.5^2;
 covar.mat <- create.Covar.Matrix(theta, phi.M, sigma);
+
 mu.uncond <- mu[1:l.tg];
 mu.cond.on <- mu[(l.tg + 1):N];
 mu.cond <- create.Mu.C(mu.uncond, mu.cond.on, y.cond, covar.mat);
+
 covar.mat.cond <- create.Covar.Matrix.Conditional(l.tg, l.tc, covar.mat);
+
 var <- diag(covar.mat.cond);
+# Correct for floating point errors, som diagonal elements are ~ -1e-16
 var[var < 0] <- 0;

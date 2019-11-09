@@ -6,13 +6,6 @@ task.tex <- paste(task, '.tex', sep='')
 task.pdf <- paste(task, '.pdf', sep='')
 tikz( task.tex , standAlone = TRUE);
 
-get.pred.interval <- function(mean, var, alpha) {
-    zq <- qnorm(alpha/2, lower.tail=FALSE);
-    lower <- mean - zq*sqrt(var);
-    upper <- mean + zq*sqrt(var);
-    return(cbind(lower, upper));
-}
-
 conf.interval <- 90; # % 
 alpha <- 1 - conf.interval / 100;
 range <- get.pred.interval(mu.cond, var, alpha);
