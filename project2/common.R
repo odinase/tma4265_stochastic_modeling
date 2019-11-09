@@ -1,17 +1,12 @@
 library(Matrix)
-library(mvtnorm)
 
-corr <- function(yt1, yt2, phi.M) {
-    return((1+phi.M*abs(yt1 - yt2))*exp(-phi.M*abs(yt1 - yt2)));
-}
-
-covar.matrix <- function(theta, phi.M, sigma) {
+create.Covar.Matrix <- function(theta, phi.M, sigma) {
     ones <- as.matrix(rep(1.0, length(theta)));
     H <- abs(theta %*% t(ones) - ones %*% t(theta));
     return(sigma*(1 + phi.M*H)*exp(-phi.M*H));
 }
 
-mu.c <- function(mu.1, mu.2, a, covar.matrix) {
+create.Mu.C <- function(mu.1, mu.2, a, covar.matrix) {
     p <- length(mu.1);
     q <- length(mu.2);
     N <- p + q;
@@ -22,7 +17,7 @@ mu.c <- function(mu.1, mu.2, a, covar.matrix) {
     return(mu.1 + (covar.matrix.12 %*% solve(covar.matrix.22)) %*% (a - mu.2))
 }
 
-covar.matrix.c <- function(p, q, covar.matrix) {
+create.Covar.Matrix.Conditional <- function(p, q, covar.matrix) {
     N <- p + q;
     covar.matrix.11 <- covar.matrix[1:p, 1:p];
     covar.matrix.12 <- covar.matrix[1:p, (p+1):N];
@@ -33,26 +28,22 @@ covar.matrix.c <- function(p, q, covar.matrix) {
 
 
 phi.M <- 15;
+E.Y <- 0.5;
+theta.cond <- as.matrix(c(0.300, 0.350, 0.390, 0.410, 0.450));
+theta.grid <- as.matrix(seq(from=0.250, to=0.500, by=0.005));
+theta <- rbind(theta.grid, theta.cond)
 
-# Does initial comparisons in integers to avoid float derps
-theta.cond <- c(300, 350, 390, 410, 450);
-theta <- seq(from=250, to=500, by=5);
-theta.uncond <- setdiff(theta, theta.cond);
-nt <- length(theta)
+# Useful constants for lengths
 
-# Needs to convert to matrix to use matrix multiplication and make the numbers floats
-theta.cond <- as.matrix(theta.cond) / 1000;
-theta.uncond <- as.matrix(theta.uncond) / 1000;
-theta <- rbind(theta.uncond, theta.cond);
+l.tg <- length(theta.grid);
+l.tc <- length(theta.cond);
+N <- l.tg + l.tc;
 
-y <- as.matrix(c(0.50, 0.32, 0.40, 0.35, 0.60));
-ny <- length(y);
-mu.uncond <- as.matrix(rep(0.5, nt));
+mu <- as.matrix(rep(E.Y, N))
+y.cond <- as.matrix(c(0.500, 0.320, 0.400, 0.350, 0.600));
 sigma <- 0.5^2;
-c.m <- covar.matrix(theta, phi.M, sigma);
-mu.1 <- mu.uncond[1:(nt-ny)];
-mu.2 <- mu.uncond[(nt-ny+1):nt];
-p <- length(mu.1);
-q <- length(mu.2);
-mu.cond <- mu.c(mu.1, mu.2, y, c.m);
-c.m.cond <- covar.matrix.c(p, q, c.m);
+covar.mat <- create.Covar.Matrix(theta, phi.M, sigma);
+mu.uncond <- mu[1:l.tg];
+mu.cond.on <- mu[(l.tg + 1):N];
+mu.cond <- create.Mu.C(mu.uncond, mu.cond.on, y.cond, covar.mat);
+covar.mat.cond <- create.Covar.Matrix.Conditional(l.tg, l.tc, covar.mat);
