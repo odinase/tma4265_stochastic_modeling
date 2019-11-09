@@ -47,3 +47,5 @@ mu.uncond <- mu[1:l.tg];
 mu.cond.on <- mu[(l.tg + 1):N];
 mu.cond <- create.Mu.C(mu.uncond, mu.cond.on, y.cond, covar.mat);
 covar.mat.cond <- create.Covar.Matrix.Conditional(l.tg, l.tc, covar.mat);
+var <- diag(covar.mat.cond);
+var[var < 0] <- 0;

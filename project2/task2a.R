@@ -1,7 +1,7 @@
 source("common.R")
 system(paste('rm *.tex', sep=''));
 require( tikzDevice );
-task <- 'task2b'
+task <- 'task2a'
 task.tex <- paste(task, '.tex', sep='')
 task.pdf <- paste(task, '.pdf', sep='')
 tikz( task.tex , standAlone = TRUE);
@@ -13,8 +13,6 @@ get.pred.interval <- function(mean, var, alpha) {
     return(cbind(lower, upper));
 }
 
-var <- diag(covar.mat.cond);
-var[var < 0] <- 0;
 conf.interval <- 90; # % 
 alpha <- 1 - conf.interval / 100;
 range <- get.pred.interval(mu.cond, var, alpha);
