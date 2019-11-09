@@ -38,6 +38,7 @@ task.tex <- paste(task, '.tex', sep='')
 task.pdf <- paste(task, '.pdf', sep='')
 tikz( task.tex , standAlone = TRUE);
 
+par(mar=c(5,6,4,1)+.1)
 plot(NULL,NULL, xlim = c(0.25,0.5), ylim = c(0.2, 1.0), main = 'E[$Y(\\theta)]$ for different $\\theta$ enveloped in a $90\\%$ prediction interval',
      xlab = '$\\theta$', ylab = 'E[$Y(\\theta)$]', cex.lab = 1.5)
 lines(theta.grid, mu.cond.updated, col="black", lwd=1.2*2)
@@ -58,8 +59,9 @@ task.tex <- paste(task, '.tex', sep='')
 task.pdf <- paste(task, '.pdf', sep='')
 tikz( task.tex , standAlone = TRUE);
 
+par(mar=c(5,6,4,1)+.1)
 plot(NULL,NULL, xlim = c(0.25,0.5), ylim = c(0, 0.4), main = 'P$\\left(Y(\\theta)<0.30\\right)$ for different $\\theta$',
-     xlab = '$\\theta$', ylab = 'P$\\left(Y(\\theta)<0.30\\right)$', cex.lab = 1.5)
+     xlab = '$\\theta$', ylab = 'P$\\left(Y(\\theta)\\right)$', cex.lab = 1.5)
 lines(theta.grid, probs.updated, col="blue", lwd=1.2*2)
 legend(0.35,0.9,legend = "P$\\left(Y(\\theta)<0.30\\right)$", cex = 0.8, lty = 1, lwd=2.4, col="blue")
 dev.off();

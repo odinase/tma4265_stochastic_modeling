@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\nonstopmode \input ./task2b.tex
-(./task2b.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+**\nonstopmode \input ./task2a.tex
+(./task2a.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
@@ -336,8 +336,8 @@ Package: luatex85 2016/06/15 v1.4 pdftex aliases for luatex
 \pr@output=\toks27
 )
 (/home/odin/Documents/NTNU/autumn_2019/tma4265_stochastic_modeling/projects/pro
-ject2/task2b.aux)
-\openout1 = `task2b.aux'.
+ject2/task2a.aux)
+\openout1 = `task2a.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
@@ -428,7 +428,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 78.
 
-Overfull \hbox (160.89pt too wide) in paragraph at lines 140--140
+Overfull \hbox (160.89pt too wide) in paragraph at lines 281--281
 [][] 
  []
 
@@ -437,23 +437,23 @@ Preview: Tightpage 0 0 0 0
 Non-PDF special ignored!
 Non-PDF special ignored!]
 (/home/odin/Documents/NTNU/autumn_2019/tma4265_stochastic_modeling/projects/pro
-ject2/task2b.aux) ) 
+ject2/task2a.aux) ) 
 Here is how much of TeX's memory you used:
- 11408 strings out of 492982
- 233238 string characters out of 6134896
+ 11414 strings out of 492982
+ 233378 string characters out of 6134896
  265252 words of memory out of 5000000
- 14773 multiletter control sequences out of 15000+600000
+ 14779 multiletter control sequences out of 15000+600000
  3948 words of font info for 15 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,7n,54p,409b,639s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
 10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-
-Output written on task2b.pdf (1 page, 31819 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+Output written on task2a.pdf (1 page, 46798 bytes).
 PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

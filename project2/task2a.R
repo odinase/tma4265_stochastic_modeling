@@ -12,6 +12,7 @@ range <- get.pred.interval(mu.cond, var, alpha);
 lower <- range[,1];
 upper <- range[,2];
 
+par(mar=c(5,6,4,1)+.1)
 plot(NULL,NULL, xlim = c(0.25,0.5), ylim = c(0.2, 1.0), main = 'E[$Y(\\theta)]$ for different $\\theta$ enveloped in a $90\\%$ prediction interval',
      xlab = '$\\theta$', ylab = 'E[$Y(\\theta)$]', cex.lab = 1.5)
 lines(theta.grid, mu.cond, col="black", lwd=1.2*2)
